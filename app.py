@@ -6,8 +6,14 @@ app=Flask(__name__)
 def home():
     if request.method=='POST':
         print(request.form['inputText'])
+        text = request.form['inputText']
+        voice = int(request.form['voice'])
+        rate = int(request.form['rate'])
         engine = pyttsx3.init()
-        engine.say(request.form['inputText'])
+        voices = engine.getProperty('voices')
+        engine.setProperty('rate', rate)
+        engine.setProperty('voice', voices[voice].id)
+        engine.say(text)
         engine.runAndWait()
         engine.stop()
         return render_template('index.html')
