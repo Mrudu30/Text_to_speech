@@ -1,11 +1,13 @@
 from flask import Flask,render_template,request,jsonify, send_file
-import pyttsx3, os
+import pyttsx3, os, random
 
 app=Flask(__name__)
+
+# home page
 @app.route('/',methods=['GET','POST'])
 def home():
     if request.method=='POST':
-        print(request.form['inputText'])
+        # print(request.form['inputText'])
         text = request.form['inputText']
         voice = int(request.form['voice'])
         rate = int(request.form['rate'])
@@ -19,6 +21,16 @@ def home():
         return render_template('index.html')
     return render_template('index.html')
 
+# sample file handlers
+@app.route('/sample_file',methods=['GET', 'POST'])
+def sampleFileHandler():
+    if request.method == 'POST':
+        file_number = random.choice([1,2,3,4,5])
+        file_name = "static/samples/"+str(file_number)+".txt"
+        with open(file_name,"r") as file_text:
+            return jsonify({"file_name": file_name, "file_text": file_text.read()})
+
+# download url section
 @app.route('/download',methods=['POST'])
 def speech_download():
     if request.method == 'POST':

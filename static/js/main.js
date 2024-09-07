@@ -6,9 +6,9 @@ $(document).ready(function () {
     function check_textInput(){
         var text = $("#inputText").val();
         if(text.length > 0){
-            $(".btn").prop("disabled", false);
+            $(".submitBtn").prop("disabled", false);
         }else{
-            $(".btn").prop("disabled", true);
+            $(".submitBtn").prop("disabled", true);
         }
     }
 
@@ -21,6 +21,18 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response);
                 window.location.href = response.download_url
+            }
+        });
+    })
+
+    $('#generateBtn').click(function(e){
+        $.ajax({
+            type: "post",
+            url: "/sample_file",
+            success: function (response) {
+                console.log(response)
+                $('#inputText').val(response.file_text)
+                check_textInput()
             }
         });
     })

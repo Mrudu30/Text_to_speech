@@ -1,0 +1,15 @@
+#formBody{
+    background-color: rgba(0, 0, 0, 0.68);
+    color: aliceblue;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+    padding: 1.5rem;
+    border-radius: 2rem;
+}
+.form-group{
+    margin-top: 0.5rem;
+}
+body{
+    background-image: url('man-hanging-out-with-robot.jpg');
+    background-size: cover;
+}
